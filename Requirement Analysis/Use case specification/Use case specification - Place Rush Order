@@ -1,0 +1,9 @@
+* Name: Place Rush Order
+* Brief description: This use case describes the interactions between the AIMS software with the customer when the customer desires to place rush order
+* Precondition: Only addresses in Hanoi City are supported
+* Postcondition: None
+* Basic flow
+	1. The AIMS Software checks if there is media and the shipping address are supported to place rush order
+	2. The software changes the formula to calculate the shipping fees
+* Alternative flow
+	1.1. If there is no support, notify the customer and ask customer to update delivery information Or, the software lets customer to update rush order info

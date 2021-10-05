@@ -1,0 +1,15 @@
+* Name: Pay Order
+* Brief description: This use case describes the interactions between the AIMS software with the customer and Interbank when the customer desires to pay order
+* Precondition: The AIMS Software has calculated the total amount of money which the customer has to pay
+* Postcondition: None
+* Basic flow
+	1. The AIMS Software displays the payment screen
+	2. The customer provide a payment method and provide transaction information
+	3. The AIMS Software check if the card information is in correct format
+	4. The AIMS Software asks the Interbank to pay order
+	5. The Interbank processes the transaction
+	6. The AIMS Software saves the payment transaction
+* Alternative flow
+	3.1 If the card information has wrong format,the AIMS software notifies customer to modify informaiton
+	4.1 If the card information is invalid, the AIMS software notifies customer to modify information 
+	5.1 If the balance is not enough, the AIMS software notifies customer
