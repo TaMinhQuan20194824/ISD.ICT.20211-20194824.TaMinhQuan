@@ -1,9 +1,21 @@
 package controller;
 
-import sun.font.TrueTypeFont;
 
+/**
+ * this class controls the flow of place rush order usecase in our AIMS project.
+ * 
+ * @author taquan
+ * 
+ */
 public class PlaceRushOrderController extends BaseController {
 
+	/**
+	 * This method validate the arrival time of media.
+	 * 
+	 * @param earliestArrivalTime
+	 * @param latestArrivalTime
+	 * @return validation result: true or false
+	 */
 	public boolean validateArrivalTime(String earliestArrivalTime, String latestArrivalTime) {
 		// check input time are not null
 		if (earliestArrivalTime == null) return false;
@@ -36,7 +48,7 @@ public class PlaceRushOrderController extends BaseController {
 					return true;
 				} else return false;
 			} else return false;
-		} else return false;
-		
+		} else return false;	
 	}
+	
 }

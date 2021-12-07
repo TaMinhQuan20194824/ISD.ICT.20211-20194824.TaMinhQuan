@@ -1,13 +1,12 @@
 package controller;
 
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ValidateAddressTest {
+public class ValidateAddressTest {
 
     private PlaceOrderController placeOrderController;
 
