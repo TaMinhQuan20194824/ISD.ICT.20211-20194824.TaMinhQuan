@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+import java.util.logging.Logger;
 
 /**
  * this class controls the flow of place rush order usecase in our AIMS project.
@@ -9,6 +11,14 @@ package controller;
  */
 public class PlaceRushOrderController extends BaseController {
 
+  /**
+   * Just for logging purpose
+   */
+  private static Logger LOGGER = utils.Utils.getLogger(PlaceRushOrderController.class.getName());
+
+  
+  private void changeFormula() {};
+  
   /**
    * This method validate the arrival time of media.
    * 
