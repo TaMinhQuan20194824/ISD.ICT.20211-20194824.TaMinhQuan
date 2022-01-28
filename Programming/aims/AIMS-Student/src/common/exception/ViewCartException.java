@@ -1,4 +1,6 @@
-package common.exception;;
+package common.exception;
+
+;
 
 /**
  * The ViewCartException wraps all unchecked exceptions You can use this
@@ -8,14 +10,14 @@ package common.exception;;
  */
 public class ViewCartException extends AimsException {
 
-	private static final long serialVersionUID = 1091337136123906298L;
+  private static final long serialVersionUID = 1091337136123906298L;
 
-	public ViewCartException() {
+  public ViewCartException() {
 
-	}
+  }
 
-	public ViewCartException(String message) {
-		super(message);
-	}
+  public ViewCartException(String message) {
+    super(message);
+  }
 
 }

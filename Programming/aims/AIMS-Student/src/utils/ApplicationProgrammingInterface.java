@@ -22,23 +22,22 @@ import java.util.logging.Logger;
 import entity.payment.CreditCard;
 import entity.payment.PaymentTransaction;
 
-
 public class ApplicationProgrammingInterface {
 
   public static DateFormat DATE_FORMATER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
   private static Logger LOGGER = Utils.getLogger(Utils.class.getName());
 
   /**
-   * @param url - url to connect to bank
+   * @param url   - url to connect to bank
    * @param token - token to connect to bank
-   * @return String 
+   * @return String
    * @throws Exception
    */
   public static String get(String url, String token) throws Exception {
     LOGGER.info("Request URL: " + url + "\n");
-    
+
     HttpURLConnection conn = setupConnection(url);
-    
+
     conn.setRequestMethod("GET");
     // conn.setRequestProperty("Authorization", "Bearer " + token);
     BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -69,10 +68,10 @@ public class ApplicationProgrammingInterface {
     allowMethods("PATCH");
     String payload = data;
     LOGGER.info("Request Info:\nRequest URL: " + url + "\n" + "Payload Data: " + payload + "\n");
-    
+
     URL line_api_url = new URL(url);
     HttpURLConnection conn = setupConnection(url);
-   
+
     conn.setRequestMethod("PATCH");
 //		conn.setRequestProperty("Authorization", "Bearer " + token);
     Writer writer = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));

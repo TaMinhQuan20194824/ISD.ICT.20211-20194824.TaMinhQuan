@@ -8,27 +8,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ValidateAddressTest {
 
-    private PlaceOrderController placeOrderController;
+  private PlaceOrderController placeOrderController;
 
-    @BeforeEach
-    void setUp() {
-        placeOrderController = new PlaceOrderController();
-    }
+  @BeforeEach
+  void setUp() {
+    placeOrderController = new PlaceOrderController();
+  }
 
-    @ParameterizedTest
-    @CsvSource({
-            "hanoi,true",
-            "hai ba trung ha noi,true",
-            "so 15 Hai Ba Trung Ha Noi,false",
-            "$# Hanoi,false",
-            ",false"
-    })
-    public void test(String address, boolean expected) {
-        // when
-        boolean isValid = placeOrderController.validateAddress(address);
+  @ParameterizedTest
+  @CsvSource({ "hanoi,true", "hai ba trung ha noi,true", "so 15 Hai Ba Trung Ha Noi,false", "$# Hanoi,false",
+      ",false" })
+  public void test(String address, boolean expected) {
+    // when
+    boolean isValid = placeOrderController.validateAddress(address);
 
-        // then
-        assertEquals(expected, isValid);
-    }
+    // then
+    assertEquals(expected, isValid);
+  }
 
 }

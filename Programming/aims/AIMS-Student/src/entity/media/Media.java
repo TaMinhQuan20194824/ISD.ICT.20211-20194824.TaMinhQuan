@@ -11,161 +11,144 @@ import entity.db.AIMSDB;
 import utils.Utils;
 
 /**
- * The general media class, for another media it can be done by inheriting this class
+ * The general media class, for another media it can be done by inheriting this
+ * class
+ * 
  * @author nguyenlm
  */
 public class Media {
 
-    private static Logger LOGGER = Utils.getLogger(Media.class.getName());
+  private static Logger LOGGER = Utils.getLogger(Media.class.getName());
 
-    protected Statement stm;
-    protected int id;
-    protected String title;
-    protected String category;
-    protected int value; // the real price of product (eg: 450)
-    protected int price; // the price which will be displayed on browser (eg: 500)
-    protected int quantity;
-    protected String type;
-    protected String imageURL;
+  protected Statement stm;
+  protected int id;
+  protected String title;
+  protected String category;
+  protected int value; // the real price of product (eg: 450)
+  protected int price; // the price which will be displayed on browser (eg: 500)
+  protected int quantity;
+  protected String type;
+  protected String imageURL;
 
-    public Media() throws SQLException{
-        stm = AIMSDB.getConnection().createStatement();
+  public Media() throws SQLException {
+    stm = AIMSDB.getConnection().createStatement();
+  }
+
+  public Media(int id, String title, String category, int price, int quantity, String type) throws SQLException {
+    this.id = id;
+    this.title = title;
+    this.category = category;
+    this.price = price;
+    this.quantity = quantity;
+    this.type = type;
+
+    // stm = AIMSDB.getConnection().createStatement();
+  }
+
+  public int getQuantity() throws SQLException {
+    int updated_quantity = getMediaById(id).quantity;
+    this.quantity = updated_quantity;
+    return updated_quantity;
+  }
+
+  public Media getMediaById(int id) throws SQLException {
+    String sql = "SELECT * FROM Media ;";
+    Statement stm = AIMSDB.getConnection().createStatement();
+    ResultSet res = stm.executeQuery(sql);
+    if (res.next()) {
+
+      return new Media().setId(res.getInt("id")).setTitle(res.getString("title")).setQuantity(res.getInt("quantity"))
+          .setCategory(res.getString("category")).setMediaURL(res.getString("imageUrl")).setPrice(res.getInt("price"))
+          .setType(res.getString("type"));
     }
+    return null;
+  }
 
-    public Media (int id, String title, String category, int price, int quantity, String type) throws SQLException{
-        this.id = id;
-        this.title = title;
-        this.category = category;
-        this.price = price;
-        this.quantity = quantity;
-        this.type = type;
-
-        //stm = AIMSDB.getConnection().createStatement();
+  public List getAllMedia() throws SQLException {
+    Statement stm = AIMSDB.getConnection().createStatement();
+    ResultSet res = stm.executeQuery("select * from Media");
+    ArrayList medium = new ArrayList<>();
+    while (res.next()) {
+      Media media = new Media().setId(res.getInt("id")).setTitle(res.getString("title"))
+          .setQuantity(res.getInt("quantity")).setCategory(res.getString("category"))
+          .setMediaURL(res.getString("imageUrl")).setPrice(res.getInt("price")).setType(res.getString("type"));
+      medium.add(media);
     }
+    return medium;
+  }
 
-    public int getQuantity() throws SQLException{
-        int updated_quantity = getMediaById(id).quantity;
-        this.quantity = updated_quantity;
-        return updated_quantity;
+  public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
+    Statement stm = AIMSDB.getConnection().createStatement();
+    if (value instanceof String) {
+      value = "\"" + value + "\"";
     }
+    stm.executeUpdate(" update " + tbname + " set" + " " + field + "=" + value + " " + "where id=" + id + ";");
+  }
 
-    public Media getMediaById(int id) throws SQLException{
-        String sql = "SELECT * FROM Media ;";
-        Statement stm = AIMSDB.getConnection().createStatement();
-        ResultSet res = stm.executeQuery(sql);
-		if(res.next()) {
+  // getter and setter
+  public int getId() {
+    return this.id;
+  }
 
-            return new Media()
-                .setId(res.getInt("id"))
-                .setTitle(res.getString("title"))
-                .setQuantity(res.getInt("quantity"))
-                .setCategory(res.getString("category"))
-                .setMediaURL(res.getString("imageUrl"))
-                .setPrice(res.getInt("price"))
-                .setType(res.getString("type"));
-        }
-        return null;
-    }
+  private Media setId(int id) {
+    this.id = id;
+    return this;
+  }
 
-    public List getAllMedia() throws SQLException{
-        Statement stm = AIMSDB.getConnection().createStatement();
-        ResultSet res = stm.executeQuery("select * from Media");
-        ArrayList medium = new ArrayList<>();
-        while (res.next()) {
-            Media media = new Media()
-                .setId(res.getInt("id"))
-                .setTitle(res.getString("title"))
-                .setQuantity(res.getInt("quantity"))
-                .setCategory(res.getString("category"))
-                .setMediaURL(res.getString("imageUrl"))
-                .setPrice(res.getInt("price"))
-                .setType(res.getString("type"));
-            medium.add(media);
-        }
-        return medium;
-    }
+  public String getTitle() {
+    return this.title;
+  }
 
-    public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
-        Statement stm = AIMSDB.getConnection().createStatement();
-        if (value instanceof String){
-            value = "\"" + value + "\"";
-        }
-        stm.executeUpdate(" update " + tbname + " set" + " " 
-                          + field + "=" + value + " " 
-                          + "where id=" + id + ";");
-    }
+  public Media setTitle(String title) {
+    this.title = title;
+    return this;
+  }
 
-    // getter and setter 
-    public int getId() {
-        return this.id;
-    }
+  public String getCategory() {
+    return this.category;
+  }
 
-    private Media setId(int id){
-        this.id = id;
-        return this;
-    }
+  public Media setCategory(String category) {
+    this.category = category;
+    return this;
+  }
 
-    public String getTitle() {
-        return this.title;
-    }
+  public int getPrice() {
+    return this.price;
+  }
 
-    public Media setTitle(String title) {
-        this.title = title;
-        return this;
-    }
+  public Media setPrice(int price) {
+    this.price = price;
+    return this;
+  }
 
-    public String getCategory() {
-        return this.category;
-    }
+  public String getImageURL() {
+    return this.imageURL;
+  }
 
-    public Media setCategory(String category) {
-        this.category = category;
-        return this;
-    }
+  public Media setMediaURL(String url) {
+    this.imageURL = url;
+    return this;
+  }
 
-    public int getPrice() {
-        return this.price;
-    }
+  public Media setQuantity(int quantity) {
+    this.quantity = quantity;
+    return this;
+  }
 
-    public Media setPrice(int price) {
-        this.price = price;
-        return this;
-    }
+  public String getType() {
+    return this.type;
+  }
 
-    public String getImageURL(){
-        return this.imageURL;
-    }
+  public Media setType(String type) {
+    this.type = type;
+    return this;
+  }
 
-    public Media setMediaURL(String url){
-        this.imageURL = url;
-        return this;
-    }
-
-    public Media setQuantity(int quantity) {
-        this.quantity = quantity;
-        return this;
-    }
-
-    public String getType() {
-        return this.type;
-    }
-
-    public Media setType(String type) {
-        this.type = type;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + id + "'" +
-            ", title='" + title + "'" +
-            ", category='" + category + "'" +
-            ", price='" + price + "'" +
-            ", quantity='" + quantity + "'" +
-            ", type='" + type + "'" +
-            ", imageURL='" + imageURL + "'" +
-            "}";
-    }    
+  @Override
+  public String toString() {
+    return "{" + " id='" + id + "'" + ", title='" + title + "'" + ", category='" + category + "'" + ", price='" + price
+        + "'" + ", quantity='" + quantity + "'" + ", type='" + type + "'" + ", imageURL='" + imageURL + "'" + "}";
+  }
 
 }

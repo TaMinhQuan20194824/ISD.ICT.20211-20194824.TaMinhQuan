@@ -7,28 +7,32 @@ import java.util.logging.Logger;
  * this class controls the flow of place rush order usecase in our AIMS project.
  * 
  * @author taquan
- * 
+ * @version 1.1
  */
-public class PlaceRushOrderController extends BaseController {
+public class PlaceRushOrderController extends PlaceOrderController {
 
   /**
    * Just for logging purpose
    */
   private static Logger LOGGER = utils.Utils.getLogger(PlaceRushOrderController.class.getName());
 
-  
-  private void changeFormula() {};
-  
+  public void placeRushOrder() {
+
+  }
+
+  private void changeFormula() {
+  };
+
   /**
    * This method validate the arrival time of media.
    * 
    * @param earliestArrivalTime - the earliest time for medias to arrive
-   * @param latestArrivalTime - the latest time for medias to arrive
+   * @param latestArrivalTime   - the latest time for medias to arrive
    * @return validation result: true or false
    */
   public boolean validateArrivalTime(String earliestArrivalTime, String latestArrivalTime) {
     // check input time are not null
-    if (earliestArrivalTime == null) { 
+    if (earliestArrivalTime == null) {
       return false;
     }
     if (latestArrivalTime == null) {
@@ -70,5 +74,5 @@ public class PlaceRushOrderController extends BaseController {
       return false;
     }
   }
-	
+
 }

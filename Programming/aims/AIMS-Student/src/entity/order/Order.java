@@ -6,7 +6,7 @@ import java.util.List;
 
 import utils.Configs;
 
-public class Order {  
+public class Order {
 
   private int shippingFees;
   private List lstOrderMedia;
